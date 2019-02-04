@@ -7,3 +7,6 @@ A full-stack web app featuring scraped articles.
 - mongoose
 - cheerio
 - axios
+- linting using AirBnB style guide
+- morgan to log requests (dev only)
+- mocha & chai for unit testing (dev only)
