@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.send('This is the index page.');
+  res.render('index');
 });
 
 router.get('/testroute', (req, res) => {
-  res.send('Test is working.');
+  res.status(200).send('ok');
 });
 
 module.exports = router;
