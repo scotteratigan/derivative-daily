@@ -7,6 +7,6 @@ A full-stack web app featuring scraped articles.
 - mongoose
 - cheerio
 - axios
-- linting using AirBnB style guide
+- eslint linting to enforce style guidelines (using AirBnB rules)
 - morgan to log requests (dev only)
 - mocha & chai for unit testing (dev only)
