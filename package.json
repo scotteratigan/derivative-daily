@@ -2,10 +2,13 @@
   "name": "derivitave-daily",
   "version": "1.0.0",
   "description": "A Full-Stack Web-Scraping News Site",
+  "directories": {
+    "test": "test"
+  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,8 @@
   "homepage": "https://github.com/scotteratigan/derivitave-daily#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
@@ -42,6 +47,7 @@
   "devDependencies": {
     "eslint": "^5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0"
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^5.2.0"
   }
 }

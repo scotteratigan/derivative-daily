@@ -51,3 +51,5 @@ app.use(routes);
 app.listen(EXPRESS_PORT, () => {
   console.log(`Express running at: http://localhost:${EXPRESS_PORT}`);
 });
+
+module.exports = app; // for testing purposes

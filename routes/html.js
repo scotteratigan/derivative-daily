@@ -1,9 +1,11 @@
 const router = require('express').Router();
-const articleController = require('../controllers/articleController.js');
 
-router.get('/articles', articleController.getArticles);
-router.get('/articles/:id', articleController.getArticle);
-router.post('/', articleController.createArticle);
-router.get('/scrape', articleController.scrapeArticles);
+router.get('/', (req, res) => {
+  res.send('This is the index page.');
+});
+
+router.get('/testroute', (req, res) => {
+  res.send('Test is working.');
+});
 
 module.exports = router;
