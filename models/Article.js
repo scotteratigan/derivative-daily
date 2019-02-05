@@ -1,20 +1,23 @@
 const mongoose = require('mongoose');
 
 // Save a reference to the Schema constructor
-const { Schema } = mongoose;
+const {
+  Schema,
+} = mongoose;
 
 // Using the Schema constructor, create a new UserSchema object
-// This is similar to a Sequelize model
+// I've decided to make the URL the unique index to prevent duplicates.
 const ArticleSchema = new Schema({
-  // `title` is required and of type String
   title: {
     type: String,
     required: true,
   },
-  // `link` is required and of type String
   link: {
     type: String,
     required: true,
+    index: {
+      unique: true,
+    },
   },
   // `note` is an object that stores a Note id
   // The ref property links the ObjectId to the Note model

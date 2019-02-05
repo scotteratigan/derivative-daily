@@ -12,37 +12,23 @@ const routes = require('./routes');
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
 });
-
-/* const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected to mongoose database.');
-  const kittySchema = new mongoose.Schema({
-    name: String,
-  });
-  const Kitten = mongoose.model('Kitten', kittySchema);
-  const myKitten = new Kitten({
-    name: 'Holly',
-  });
-  console.log('My kitten is named:', myKitten.name); // 'Holly'
-  myKitten.save((err, savedKitten) => {
-    if (err) {
-      throw new Error(err);
-    }
-    console.log('Saved kitten:', savedKitten.name);
-  });
-}); */
 
 const app = express();
 app.engine('handlebars',
-  exphbs({ defaultLayout: 'main' }));
+  exphbs({
+    defaultLayout: 'main',
+  }));
 
 app.set('view engine', 'handlebars');
 app.use(logger('dev')); // log http requests on dev server
 
 // Parse request body as JSON:
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true,
+}));
 app.use(express.json());
 
 app.use(express.static('public')); // Make public a static folder
