@@ -19,28 +19,35 @@ const scrapeArticles = (req, res) => {
         console.error('Error parsing article with cheerio:\n', err);
       }
       if (link && title) { // only add to db if both link and title are present
-        db.Article.create({
-          title,
+        db.Article.findOne({
           link,
-        })
-          .then((dbArticle) => {
-            console.log(dbArticle);
-          })
-          .catch((err) => {
-            if (err.code === 11000) {
-              console.log('Skipping insertion of duplicate article.');
-            } else { // If an error occurred, log it
-              console.error('Error adding scraped article to database:\n', err);
-            }
-          });
+        }, (err, article) => {
+          if (err) {
+            console.error('Error checking if article already exists:', err);
+          }
+          if (article) {
+            console.log('Article exists.');
+          } else {
+            db.Article.create({
+              title,
+              link,
+            })
+              .then((dbArticle) => {
+                console.log(dbArticle);
+              })
+              .catch((dbErr) => {
+                console.error('Error adding scraped article to database:\n', dbErr);
+              });
+          }
+        });
       }
     });
-    res.send('Scraping in progress...');
+    res.redirect('/scraping.html');
   });
 };
 
 const getArticles = (req, res) => {
-  db.Article.find({})
+  db.Article.find({}).sort({})
     .then((dbArticle) => {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);

@@ -10,21 +10,27 @@
 </head>
 
 <body class="bg-light">
+
+	<div class="jumbotron text-center bg-light">
+		<h1 class="display-3 text-center">NPR Note Scraper</h1>
+		<p class="lead text-center">View and notate the top stories from National Public Radio.</p>
+		<hr class="my-1">
+		<a class="btn btn-primary" href="/api/scrape" role="button">Scrape New Stories</a>
+		<a href="https://www.npr.org/donations/support" target="_blank">
+			<button type="button" class="btn btn-info">Donate to NPR</button>
+		</a>
+	</div>
+
 	<div class="container">
-		<h1 class="text-primary text-center mt-3 mb-5">NPR Note Scraper</h1>
-		<!-- <div class="row">
-			<div class="col"> -->
-		<h2 class="">Articles</h2>
+		<h2 class="" id="article-list-header"></h2>
 		<div id="articles"></div>
-		<!-- </div>
-		</div> -->
 	</div>
 
 	<div class="modal" id="article-modal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="modal-article-title">Modal title</h5>
+					<h5 class="modal-title" id="modal-article-title"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -37,6 +43,7 @@
 					<!-- <textarea id='bodyinput' name='body'></textarea> -->
 				</div>
 				<div class="modal-footer">
+
 					<button type="button" class="btn btn-primary" id="savenote" data-dismiss="modal">Save</button>
 				</div>
 			</div>

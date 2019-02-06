@@ -16,6 +16,6 @@ A full-stack web app featuring scraped articles.
 - scrape date/time in Article schema
 - sort newest first when displaying scraped articles
 - delete notes
-- scrape button
 - multiple comments
 - author on comments
+- number to text for story count
