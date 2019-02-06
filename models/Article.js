@@ -18,6 +18,7 @@ const ArticleSchema = new Schema({
   },
   summary: {
     type: String,
+    default: '',
   },
   scrapeTime: {
     type: Date,
