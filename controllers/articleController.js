@@ -47,7 +47,9 @@ const scrapeArticles = (req, res) => {
 };
 
 const getArticles = (req, res) => {
-  db.Article.find({}).sort({})
+  db.Article.find({}).sort({
+    scrapeTime: -1, // sort newest stories first
+  })
     .then((dbArticle) => {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);

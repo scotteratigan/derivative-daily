@@ -16,6 +16,10 @@ const ArticleSchema = new Schema({
     type: String,
     required: true,
   },
+  scrapeTime: {
+    type: Date,
+    default: Date.now,
+  },
   // `note` is an object that stores a Note id
   // The ref property links the ObjectId to the Note model
   // This allows us to populate the Article with an associated Note
@@ -23,9 +27,6 @@ const ArticleSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Note',
   },
-  // {
-  //   timestamps: true
-  // },
 });
 
 // This creates our model from the above schema, using mongoose's model method

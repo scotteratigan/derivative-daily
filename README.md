@@ -13,8 +13,6 @@ A full-stack web app featuring scraped articles.
 - mocha & chai for unit testing (dev only)
 
 ### Todo:
-- scrape date/time in Article schema
-- sort newest first when displaying scraped articles
 - delete notes
 - multiple comments
 - author on comments
