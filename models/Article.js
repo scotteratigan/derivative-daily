@@ -26,6 +26,9 @@ const ArticleSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Note',
   },
+  // {
+  //   timestamps: true
+  // },
 });
 
 // This creates our model from the above schema, using mongoose's model method

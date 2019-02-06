@@ -1,0 +1,9 @@
+.hover-shadow:hover {
+	transition: .2s ease;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, .8);
+	transform: translateY(-10px) scale(1.02);
+}
+
+h5.news-article {
+	display: inline;
+}
