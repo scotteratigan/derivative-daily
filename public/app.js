@@ -4,7 +4,7 @@
 
 let lastEditButtonClicked; // global for tracking note clicks;
 
-// Grab the articles as a json
+// Query the articles db and parse the JSON into html
 $.getJSON('/api/articles', (articleArray) => {
   if (articleArray.length === 0) {
     window.location.replace('/api/scrape');
@@ -17,7 +17,7 @@ $.getJSON('/api/articles', (articleArray) => {
     articlesHTML += `
       <div class="row my-4">
         <div class="col-11">
-          <a href="${article.link}" alt="View on NPR.org" target="_blank">
+          <a href="${article.link}" alt="View on NPR.org" target="_blank" class="link-without-underline">
             <i class="fas fa-external-link-alt"></i>
           </a>
           <h5 class='news-article'>
@@ -25,6 +25,9 @@ $.getJSON('/api/articles', (articleArray) => {
               ${article.title}
             </span>
           </h5>
+          <p>
+            ${article.summary}
+          </p>
         </div>
         <div class="col-1">
           <button type="button" class="btn ${notateButtonColor} news-note-button" data-toggle="modal" data-target="#article-modal" data-id='${article._id}'>

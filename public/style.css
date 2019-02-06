@@ -12,6 +12,10 @@ h5.news-article {
 	font-family: 'Source Code Pro', monospace;
 }
 
+a.link-without-underline {
+	text-decoration: none !important;
+}
+
 /*
 	progress bar credit to Hugo Giraudel
 	https://codepen.io/HugoGiraudel/pen/qwFKu

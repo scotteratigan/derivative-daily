@@ -11,10 +11,13 @@ const scrapeArticles = (req, res) => {
     $('article').each((i, element) => {
       let link;
       let title;
+      let summary;
       try {
         link = $(element).find('div.imagewrap').find('a').attr('href');
         title = $(element).find('div.imagewrap').find('a').find('img')
           .attr('alt');
+        summary = $(element).find('p.teaser').find('a').text();
+        summary = summary.split('•')[1].trim();
       } catch (err) {
         console.error('Error parsing article with cheerio:\n', err);
       }
@@ -31,6 +34,7 @@ const scrapeArticles = (req, res) => {
             db.Article.create({
               title,
               link,
+              summary,
             })
               // .then((dbArticle) => {
               //   console.log(dbArticle);
