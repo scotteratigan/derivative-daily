@@ -5,9 +5,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose'); // https://mongoosejs.com/docs/index.html
 const logger = require('morgan'); // request logger
-// const cheerio = require('cheerio');
-// const axios = require('axios');
-
+const path = require('path');
 const routes = require('./routes');
 
 mongoose.connect(MONGODB_URI, {
@@ -31,8 +29,9 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
-app.use(express.static('public')); // Make public a static folder
 app.use(routes);
+// app.use(express.static('public')); // Make public a static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(EXPRESS_PORT, () => {
   console.log(`Express running at: http://localhost:${EXPRESS_PORT}`);

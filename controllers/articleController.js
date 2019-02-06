@@ -26,15 +26,15 @@ const scrapeArticles = (req, res) => {
             console.error('Error checking if article already exists:', err);
           }
           if (article) {
-            console.log('Article exists.');
+            // console.log('Article exists.');
           } else {
             db.Article.create({
               title,
               link,
             })
-              .then((dbArticle) => {
-                console.log(dbArticle);
-              })
+              // .then((dbArticle) => {
+              //   console.log(dbArticle);
+              // })
               .catch((dbErr) => {
                 console.error('Error adding scraped article to database:\n', dbErr);
               });
@@ -42,7 +42,7 @@ const scrapeArticles = (req, res) => {
         });
       }
     });
-    res.redirect('/scraping.html');
+    res.redirect('/scraping');
   });
 };
 
@@ -61,8 +61,7 @@ const getArticles = (req, res) => {
 };
 
 const createNote = (req, res) => {
-  // Create a new note and pass the req.body to the entry
-  console.log('req.body is:', req.body);
+  // Create a new note
   db.Note.create(req.body)
     .then(dbNote => db.Article.findOneAndUpdate({
       _id: req.params.id,
@@ -82,14 +81,11 @@ const createNote = (req, res) => {
 };
 
 const deleteNote = (req, res) => {
-  console.log(req.body.articleId);
   db.Note.deleteOne({
     _id: req.params.id,
   }, (err) => {
     if (err) {
       console.error('Error deleting note.');
-    } else {
-      console.log('Note deleted.');
     }
   });
   db.Note.findOne({
@@ -118,9 +114,6 @@ const getArticle = (req, res) => {
     .then((dbArticle) => {
       // If we were able to successfully find an Article with the given id,
       // send it back to the client
-      console.log('*******************************');
-      console.log(dbArticle);
-      console.log('*******************************');
       res.json(dbArticle);
     })
     .catch((err) => {
