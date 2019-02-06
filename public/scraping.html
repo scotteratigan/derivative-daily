@@ -8,29 +8,21 @@
 	<title>Scraping in progress...</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	 crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" sizes="32x32" href="https://media.npr.org/templates/favicon/favicon-32x32.png" />
+	<link rel="icon" sizes="16x16" href="https://media.npr.org/templates/favicon/favicon-16x16.png" />
 </head>
 
-<body>
+<body class="bg-light">
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Scraping NPR News...</h1>
-			<p class="lead">Please wait <span id="countdown">3</span> seconds for content to populate.</p>
+			<p class="lead">Please wait <span class="font-weight-bold" id="countdown">5</span> seconds for content to populate.</p>
+			<div class="mx-5 my-5" id="progress-bar"></div>
 		</div>
 	</div>
-	<p> </p>
-	<script>
-		setInterval(() => {
-			let seconds = document.querySelector('#countdown').innerText;
-			if (seconds > 0) {
-				seconds -= 1;
-			}
-			document.querySelector('#countdown').innerText = seconds;
-		}, 1000);
-		setTimeout(() => {
-			// reload the index page after 3 seconds.
-			window.location.href = "/";
-		}, 3000);
-	</script>
+
+	<script src="scraping.js"></script>
 </body>
 
 </html>

@@ -3,26 +3,33 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>NPR Note Scraper</title>
+	<title>NPR Scraper & Notater</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	 crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
+	<link rel="icon" sizes="32x32" href="https://media.npr.org/templates/favicon/favicon-32x32.png" />
+	<link rel="icon" sizes="16x16" href="https://media.npr.org/templates/favicon/favicon-16x16.png" />
 </head>
 
 <body class="bg-light">
 
 	<div class="jumbotron text-center bg-light">
-		<h1 class="display-3 text-center">NPR Note Scraper</h1>
+		<h1 class="display-3 text-center"><span class="bg-danger text-white font-mono px-2">N</span><span class="bg-dark text-white font-mono px-2">P</span><span
+			 class="bg-primary text-white font-mono px-2">R</span> Scraper & Notater</h1>
 		<p class="lead text-center">View and notate the top stories from National Public Radio.</p>
-		<hr class="my-1">
 		<a class="btn btn-primary" href="/api/scrape" role="button">Scrape New Stories</a>
 		<a href="https://www.npr.org/donations/support" target="_blank">
-			<button type="button" class="btn btn-info">Donate to NPR</button>
+			<button type="button" class="btn btn-dark">Donate to NPR</button>
 		</a>
+		<a href="https://github.com/scotteratigan" target="_blank">
+			<button type="button" class="btn btn-danger">GitHub Repo</button>
+		</a>
+		<p>Find your <a href="https://www.npr.org/stations/" target="_blank">local station</a>.</p>
 	</div>
 
 	<div class="container">
-		<h2 class="" id="article-list-header"></h2>
+		<h2 class="font-italic" id="article-list-header"></h2>
 		<div id="articles"></div>
 	</div>
 
@@ -40,21 +47,27 @@
 						<label for="comment">Comment:</label>
 						<textarea class="form-control" rows="5" id="bodyinput" name="body"></textarea>
 					</div>
-					<!-- <textarea id='bodyinput' name='body'></textarea> -->
 				</div>
 				<div class="modal-footer">
-
-					<button type="button" class="btn btn-primary" id="savenote" data-dismiss="modal">Save</button>
+					<button type="button" class="btn btn-danger invisible" id="deletenote" data-dismiss="modal">Delete</button>
+					<button type="button" class="btn btn-primary" id="savenote" data-dismiss="modal">Save Note</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<footer class="page-footer font-small blue">
+		<hr>
+		<div class="text-center pt-3 pb-4">Developed by Scott Ratigan -
+			<a href="https://github.com/scotteratigan" target="_blank"> GitHub</a> |
+			<a href="https://www.linkedin.com/in/scotteratigan/" target="_blank"> LinkedIn</a>
+		</div>
+	</footer>
+
 	<script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7"
 	 crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	 crossorigin="anonymous"></script> -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	 crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
 	 crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"

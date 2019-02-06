@@ -11,11 +11,10 @@ $.getJSON('/api/articles', (articleArray) => {
     return;
   }
   $('#article-list-header').text(`${articleArray.length} stories found:`);
+  let articlesHTML = '';
   articleArray.forEach((article) => {
-    console.log(article);
     const notateButtonColor = article.note ? 'btn-primary' : 'btn-secondary';
-
-    $('#articles').append(`
+    articlesHTML += `
       <div class="row my-4">
         <div class="col-11">
           <a href="${article.link}" alt="View on NPR.org" target="_blank">
@@ -32,15 +31,14 @@ $.getJSON('/api/articles', (articleArray) => {
             <i class="fas fa-edit"></i>
           </button>
         </div>
-      </div>`);
+      </div>`;
   });
+  $('#articles').append(articlesHTML); // appending all at once to avoid reflow.
 });
 
 // When user opens edit modal:
 $(document).on('click', 'button.news-note-button', function () {
   const thisId = $(this).attr('data-id');
-  console.log(thisId);
-  console.log('Get request is:', `/api/articles/${thisId}`);
   // Storing this so the icon color can be changed later when someone clicks save:
   lastEditButtonClicked = $(this);
   // Load the article info:
@@ -53,9 +51,13 @@ $(document).on('click', 'button.news-note-button', function () {
       $('#modal-article-title').text(data.title); // update title
       $('#bodyinput').val(''); // clear out previous value
       $('#savenote').attr('data-id', data._id);
+      $('#deletenote').addClass('invisible');
       // If there's a note associated with the article, add it to modal:
       if (data.note) {
         $('#bodyinput').val(data.note.body);
+        $('#deletenote').attr('data-id', data.note._id);
+        $('#deletenote').attr('data-article-id', data._id);
+        $('#deletenote').removeClass('invisible');
       }
     });
 });
@@ -65,23 +67,35 @@ $(document).on('click', '#savenote', function () {
   const thisId = $(this).attr('data-id');
   $.ajax({
     method: 'POST',
-    url: `/api/articles/${thisId}`,
+    url: `/api/addnote/${thisId}`,
     data: {
       body: $('#bodyinput').val(),
     },
-  })
-    // With that done
-    .then((data) => {
-      lastEditButtonClicked.addClass('btn-primary');
-      lastEditButtonClicked.removeClass('btn-secondary');
-      $('#modal-article-title').text(''); // clear out title
-      $('#bodyinput').val(''); // clear out previous value
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-      // $('#notes').empty();
-    });
+  }).then(() => {
+    // Don't change color of button until db is updated
+    lastEditButtonClicked.addClass('btn-primary');
+    lastEditButtonClicked.removeClass('btn-secondary');
+  });
+  // Clear out modal fields.
+  $('#modal-article-title').text(''); // clear out title
+  $('#bodyinput').val(''); // clear out previous value
+});
 
-  // Also, remove the values entered in the input and textarea for note entry
-  $('#bodyinput').val('');
+// When a user deletes a note:
+$(document).on('click', '#deletenote', function () {
+  const thisId = $(this).attr('data-id');
+  lastEditButtonClicked.removeClass('btn-primary');
+  lastEditButtonClicked.addClass('btn-secondary');
+  $('#deletenote').addClass('invisible');
+  $('#modal-article-title').text(''); // clear out title
+  $('#bodyinput').val(''); // clear out previous value
+  $.ajax({
+    method: 'POST',
+    url: `/api/removenote/${thisId}`,
+    data: {
+      // sending in the article linked from the note
+      // this way the entry for note can be removed
+      articleId: $(this).attr('data-article-id'),
+    },
+  });
 });

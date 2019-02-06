@@ -39,13 +39,6 @@ chai.use(chaiHttp);
 //   expect,
 // } = require('chai');
 
-const fourtyTwo = 42;
-describe('Sample Test', () => {
-  it('should equal 42', () => {
-    expect(fourtyTwo).to.equal(42);
-  });
-});
-
 describe('Express Tests', () => {
   describe('Server Test', () => {
     let request;
@@ -77,3 +70,5 @@ describe('Express Tests', () => {
     });
   });
 });
+
+// todo: add db tests

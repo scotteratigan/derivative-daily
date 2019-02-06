@@ -60,7 +60,7 @@ const getArticles = (req, res) => {
     });
 };
 
-const createArticle = (req, res) => {
+const createNote = (req, res) => {
   // Create a new note and pass the req.body to the entry
   console.log('req.body is:', req.body);
   db.Note.create(req.body)
@@ -81,6 +81,34 @@ const createArticle = (req, res) => {
     });
 };
 
+const deleteNote = (req, res) => {
+  console.log(req.body.articleId);
+  db.Note.deleteOne({
+    _id: req.params.id,
+  }, (err) => {
+    if (err) {
+      console.error('Error deleting note.');
+    } else {
+      console.log('Note deleted.');
+    }
+  });
+  db.Note.findOne({
+    _id: req.body.articleId,
+  });
+
+  db.Article.findOne({
+    _id: req.body.articleId,
+  }, (err, article) => {
+    // eslint-disable-next-line no-param-reassign
+    article.note = undefined;
+    article.save();
+  });
+
+  res.json({
+    deleted: true,
+  });
+};
+
 const getArticle = (req, res) => {
   db.Article.findOne({
     _id: req.params.id,
@@ -90,6 +118,9 @@ const getArticle = (req, res) => {
     .then((dbArticle) => {
       // If we were able to successfully find an Article with the given id,
       // send it back to the client
+      console.log('*******************************');
+      console.log(dbArticle);
+      console.log('*******************************');
       res.json(dbArticle);
     })
     .catch((err) => {
@@ -99,7 +130,8 @@ const getArticle = (req, res) => {
 };
 
 module.exports = {
-  createArticle,
+  createNote,
+  deleteNote,
   getArticle,
   getArticles,
   scrapeArticles,
